@@ -6,6 +6,12 @@ import ToasterContext from '../context/ToasterContext'
 export const metadata = {
   title: 'Mensahe',
   description: 'Messenger Clone by JuliusBiascan',
+  authors: [
+    {
+      name: "JuliusBiascan",
+      url: "https://jlzkdev.vercel.app",
+    },
+  ],
 }
 
 export default function RootLayout({
