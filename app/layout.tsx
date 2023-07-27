@@ -1,6 +1,6 @@
 import './globals.css'
 import AuthContext from './context/AuthContext'
-import ActiveStatus from './components/ActiveStatus'
+import ActiveStatus from '@/components/ActiveStatus'
 import ToasterContext from './context/ToasterContext'
 
 export const metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning={true}>
         <AuthContext>
           <ToasterContext />
           <ActiveStatus />
