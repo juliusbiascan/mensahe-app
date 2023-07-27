@@ -1,11 +1,11 @@
 import { Metadata } from "next"
 import Link from "next/link"
-
+import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user-auth-form"
-import {Image}
+
 export const metadata: Metadata = {
   title: "Login",
   description: "Login to your account",
@@ -28,6 +28,7 @@ export default function LoginPage() {
       </Link>
       <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
         <div className="flex flex-col space-y-2 text-center">
+
         <Image
           height="48"
           width="48"
@@ -35,6 +36,7 @@ export default function LoginPage() {
           src="/images/logo.png"
           alt="Logo"
         />
+        
           <h1 className="text-2xl font-semibold tracking-tight">
             Welcome back
           </h1>
