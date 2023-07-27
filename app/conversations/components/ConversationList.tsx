@@ -9,7 +9,7 @@ import clsx from "clsx";
 import { find, uniq } from 'lodash';
 
 import useConversation from "@/hooks/useConversation";
-import { pusherClient } from "@/libs/pusher";
+import { pusherClient } from "@/lib/pusher";
 import GroupChatModal from "@/components/modals/GroupChatModal";
 import ConversationBox from "./ConversationBox";
 import { FullConversationType } from "@/types";
