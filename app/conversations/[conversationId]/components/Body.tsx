@@ -3,10 +3,10 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 
-import { pusherClient } from "@/app/libs/pusher";
-import useConversation from "@/app/hooks/useConversation";
+import { pusherClient } from "@/libs/pusher";
+import useConversation from "@/hooks/useConversation";
 import MessageBox from "./MessageBox";
-import { FullMessageType } from "@/app/types";
+import { FullMessageType } from "@/types";
 import { find } from "lodash";
 
 interface BodyProps {

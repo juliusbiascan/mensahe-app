@@ -1,7 +1,7 @@
 'use client';
 
 import DesktopItem from "./DesktopItem";
-import useRoutes from "@/app/hooks/useRoutes";
+import useRoutes from "@/hooks/useRoutes";
 import SettingsModal from "./SettingsModal";
 import { useState } from "react";
 import Avatar from "../Avatar";

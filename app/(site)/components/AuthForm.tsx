@@ -7,9 +7,9 @@ import { BsGithub, BsGoogle  } from 'react-icons/bs';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from "next/navigation";
 
-import Input from "@/app/components/inputs/Input";
+import Input from "@/components/inputs/Input";
 import AuthSocialButton from './AuthSocialButton';
-import Button from "@/app/components/Button";
+import Button from "@/components/Button";
 import { toast } from "react-hot-toast";
 
 type Variant = 'LOGIN' | 'REGISTER';
