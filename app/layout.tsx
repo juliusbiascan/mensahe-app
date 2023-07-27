@@ -1,5 +1,5 @@
 import './globals.css'
-import AuthContext from '../context/AuthContext'
+import AuthProvider from '@/context/auth-provider'
 import ActiveStatus from '@/components/ActiveStatus'
 import ToasterContext from '../context/ToasterContext'
 
@@ -22,11 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <AuthContext>
+        <AuthProvider>
           <ToasterContext />
           <ActiveStatus />
           {children}
-        </AuthContext>
+        </AuthProvider>
       </body>
     </html>
   )

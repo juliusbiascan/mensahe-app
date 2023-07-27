@@ -1,7 +1,7 @@
 import getCurrentUser from "@/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 
-import prisma from "@/libs/prismadb";
+import prisma from "@/lib/prismadb";
 import { pusherServer } from "@/lib/pusher";
 
 interface IParams {

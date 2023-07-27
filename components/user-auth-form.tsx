@@ -1,9 +1,9 @@
 "use client"
 
-import * as React from "react"
-import { useSearchParams } from "next/navigation"
+import { useEffect } from 'react';
+import { useRouter } from "next/navigation"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { signIn } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -14,46 +14,61 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 import { Icons } from "@/components/icons"
+import React from 'react';
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 type FormData = z.infer<typeof userAuthSchema>
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+
+  const session = useSession();
+  const router = useRouter();
+
+  // useEffect(() => {
+  //   if (session?.status === 'authenticated') {
+  //     router.push('/conversations')
+  //   }
+  // }, [session?.status, router]);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(userAuthSchema),
+    defaultValues: {
+      email: '',
+      password: ''
+    }
   })
+
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [isGitHubLoading, setIsGitHubLoading] = React.useState<boolean>(false)
-  const searchParams = useSearchParams()
 
-  async function onSubmit(data: FormData) {
-    setIsLoading(true)
+  const onSubmit = async (values: FormData) => {
+    try {
+      setIsLoading(true)
+      
+      const { email, password } = values
 
-    const signInResult = await signIn("email", {
-      email: data.email.toLowerCase(),
-      redirect: false,
-      callbackUrl: searchParams?.get("from") || "/dashboard",
-    })
+      await signIn('credentials', {
+        email: email,
+        password: password,
+        callbackUrl: '/',
+      });
 
-    setIsLoading(false)
-
-    if (!signInResult?.ok) {
-      return toast({
+      //toast.success("Login successful")
+    } catch (error) {
+      toast({
         title: "Something went wrong.",
         description: "Your sign in request failed. Please try again.",
         variant: "destructive",
       })
+    } finally {
+      setIsLoading(false)
     }
-
-    return toast({
-      title: "Check your email",
-      description: "We sent you a login link. Be sure to check your spam too.",
-    })
   }
 
   return (
@@ -71,6 +86,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               autoCapitalize="none"
               autoComplete="email"
               autoCorrect="off"
+              required
               disabled={isLoading || isGitHubLoading}
               {...register("email")}
             />
@@ -81,25 +97,31 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             )}
           </div>
           <div className="grid gap-1">
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="sr-only">Password</FormLabel>
-                    <FormControl>
-                      <Input disabled={loading} type="password" placeholder="Password" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <Label className="sr-only" htmlFor="email">
+              Password
+            </Label>
+            <Input
+              id="password"
+              placeholder="password"
+              type="password"
+              autoCapitalize="none"
+              autoComplete="password"
+              autoCorrect="off"
+              required
+              disabled={isLoading || isGitHubLoading}
+              {...register("password")}
+            />
+            {errors?.password && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.password.message}
+              </p>
+            )}
+          </div>
           <button className={cn(buttonVariants())} disabled={isLoading}>
             {isLoading && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            Sign In with Email
+            Sign In
           </button>
         </div>
       </form>

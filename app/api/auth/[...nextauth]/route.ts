@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-
+import { userAuthSchema } from "@/lib/validations/auth"
 import prisma from "@/lib/prismadb"
 
 export const authOptions: AuthOptions = {
@@ -25,13 +25,16 @@ export const authOptions: AuthOptions = {
         password: { label: 'password', type: 'password' }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials?.password) {
+
+        const { email, password } = userAuthSchema.parse(credentials);
+
+        if (!email || !password) {
           throw new Error('Invalid credentials');
         }
 
         const user = await prisma.user.findUnique({
           where: {
-            email: credentials.email
+            email: email
           }
         });
 
@@ -40,7 +43,7 @@ export const authOptions: AuthOptions = {
         }
 
         const isCorrectPassword = await bcrypt.compare(
-          credentials.password,
+          password,
           user.hashedPassword
         );
 
@@ -52,9 +55,27 @@ export const authOptions: AuthOptions = {
       }
     })
   ],
+  callbacks: {
+    session({ session, token }) {
+      session.user.id = token.id;
+      session.user.username = token.username;
+      return session;
+    },
+    jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = user.id;
+        token.username = (user as User).username;
+      }
+      return token;
+    },
+  },
   debug: process.env.NODE_ENV === 'development',
   session: {
     strategy: "jwt",
+  },
+  pages: {
+    signIn: '/login',
   },
   secret: process.env.NEXTAUTH_SECRET,
 }

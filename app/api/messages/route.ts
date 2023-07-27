@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import { pusherServer } from '@/lib/pusher'
-import prisma from "@/libs/prismadb";
+import prisma from "@/lib/prismadb";
 
 export async function POST(
   request: Request,
