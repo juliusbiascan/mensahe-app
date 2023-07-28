@@ -10,6 +10,7 @@ import {
   Cloud,
   Github,
   LifeBuoy,
+  LogOut,
   Settings,
   User as Userx,
 } from "lucide-react"
@@ -102,7 +103,7 @@ const UserNav: React.FC<UserNavProps> = ({ user }) => {
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Github className="mr-2 h-4 w-4" />
-            <span>GitHub</span>
+            <Link href={"https://github.com/juliusbiascan"}>GitHub</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <LifeBuoy className="mr-2 h-4 w-4" />
@@ -122,7 +123,8 @@ const UserNav: React.FC<UserNavProps> = ({ user }) => {
               })
             }}
           >
-            Sign out
+            <LogOut className="mr-2 h-4 w-4" />
+            <span>Sign out</span>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
