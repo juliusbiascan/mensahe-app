@@ -1,14 +1,14 @@
 'use client';
 
-import { 
-  HiPaperAirplane, 
+import {
+  HiPaperAirplane,
   HiPhoto
 } from "react-icons/hi2";
 import MessageInput from "./MessageInput";
-import { 
-  FieldValues, 
-  SubmitHandler, 
-  useForm 
+import {
+  FieldValues,
+  SubmitHandler,
+  useForm
 } from "react-hook-form";
 import axios from "axios";
 import { CldUploadButton } from "next-cloudinary";
@@ -45,40 +45,29 @@ const Form = () => {
     })
   }
 
-  return ( 
-    <div 
-      className="
-        py-4 
-        px-4 
-        bg-white 
-        border-t 
-        flex 
-        items-center 
-        gap-2 
-        lg:gap-4 
-        w-full
-      "
+  return (
+    <div className="py-2 px-2 bg-secondary border-t flex items-center gap-2 lg:gap-4 w-full"
     >
-      <CldUploadButton 
-        options={{ maxFiles: 1 }} 
-        onUpload={handleUpload} 
+      <CldUploadButton
+        options={{ maxFiles: 1 }}
+        onUpload={handleUpload}
         uploadPreset="g4huzsfn"
       >
         <HiPhoto size={30} className="text-sky-500" />
       </CldUploadButton>
-      <form 
-        onSubmit={handleSubmit(onSubmit)} 
+      <form
+        onSubmit={handleSubmit(onSubmit)}
         className="flex items-center gap-2 lg:gap-4 w-full"
       >
-        <MessageInput 
-          id="message" 
-          register={register} 
-          errors={errors} 
-          required 
+        <MessageInput
+          id="message"
+          register={register}
+          errors={errors}
+          required
           placeholder="Write a message"
         />
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="
             rounded-full 
             p-2 
@@ -97,5 +86,5 @@ const Form = () => {
     </div>
   );
 }
- 
+
 export default Form;

@@ -14,6 +14,7 @@ import GroupChatModal from "@/components/modals/GroupChatModal";
 import ConversationBox from "./ConversationBox";
 import { FullConversationType } from "@/types";
 import UserNav from "@/components/UserNav";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 interface ConversationListProps {
   initialItems: FullConversationType[];
@@ -102,8 +103,8 @@ const ConversationList: React.FC<ConversationListProps> = ({
       `, isOpen ? 'hidden' : 'block w-full left-0')}>
         <div className="px-5">
           <div className="flex justify-between mb-4 pt-4 items-center">
-            <div className="text-2xl font-bold text-neutral-800">
-              Messages
+            <div className="text-2xl font-bold">
+              Chats
             </div>
 
             <div className="flex justify-center gap-2 items-center">
@@ -124,7 +125,10 @@ const ConversationList: React.FC<ConversationListProps> = ({
                 <MdOutlineGroupAdd size={20} />
               </div>
 
-              <UserNav user={currentUser}/>
+
+              <ThemeToggle />
+              <UserNav user={currentUser} />
+
             </div>
           </div>
           {items.map((item) => (

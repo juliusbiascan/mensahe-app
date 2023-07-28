@@ -34,7 +34,6 @@ const UserList: React.FC<UserListProps> = ({
             className="
               text-2xl 
               font-bold 
-              text-neutral-800 
               py-4
             "
           >
