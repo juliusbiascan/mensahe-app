@@ -1,7 +1,8 @@
 import './globals.css'
-import AuthProvider from '@/context/auth-provider'
+import AuthProvider from '@/providers/auth-provider'
 import ActiveStatus from '@/components/ActiveStatus'
 import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from '@/providers/theme-provider'
 
 export const metadata = {
   title: 'Mensahe',
@@ -22,11 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning={true}>
-        <AuthProvider>
-          <Toaster/>
-          <ActiveStatus />
-          {children}
-        </AuthProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          <AuthProvider>
+            <Toaster />
+            <ActiveStatus />
+            {children}
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

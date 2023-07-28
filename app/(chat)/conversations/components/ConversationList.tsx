@@ -6,15 +6,14 @@ import { useSession } from "next-auth/react";
 import { useEffect, useMemo, useState } from "react";
 import { MdOutlineGroupAdd } from 'react-icons/md';
 import clsx from "clsx";
-import { find, uniq } from 'lodash';
+import { find } from 'lodash';
 
 import useConversation from "@/hooks/useConversation";
 import { pusherClient } from "@/lib/pusher";
 import GroupChatModal from "@/components/modals/GroupChatModal";
 import ConversationBox from "./ConversationBox";
 import { FullConversationType } from "@/types";
-import Avatar from "@/components/Avatar";
-import SettingsModal from "@/components/sidebar/SettingsModal";
+import UserNav from "@/components/UserNav";
 
 interface ConversationListProps {
   initialItems: FullConversationType[];
@@ -30,8 +29,6 @@ const ConversationList: React.FC<ConversationListProps> = ({
 }) => {
   const [items, setItems] = useState(initialItems);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const [isProfileOpen, setProfileOpen] = useState(false);
 
   const router = useRouter();
   const session = useSession();
@@ -91,11 +88,6 @@ const ConversationList: React.FC<ConversationListProps> = ({
         onClose={() => setIsModalOpen(false)}
       />
 
-      <SettingsModal
-        currentUser={currentUser}
-        isOpen={isProfileOpen}
-        onClose={() => setProfileOpen(false)} />
-
       <aside className={clsx(`
         fixed 
         inset-y-0 
@@ -132,20 +124,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
                 <MdOutlineGroupAdd size={20} />
               </div>
 
-              <div
-                onClick={() => setProfileOpen(true)}
-                className="
-                none
-                rounded-full 
-                p-2 
-                cursor-pointer 
-                hover:opacity-75 
-                transition
-              "
-              >
-                <Avatar user={currentUser} />
-              </div>
-
+              <UserNav user={currentUser}/>
             </div>
           </div>
           {items.map((item) => (

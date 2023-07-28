@@ -9,9 +9,9 @@ import { CldUploadButton } from 'next-cloudinary';
 
 import Input from "@/components/inputs/Input";
 import Modal from '@/components/modals/Modal';
-import Button from '../Button';
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
+import { Button } from '../ui/button';
 
 interface SettingsModalProps {
   isOpen?: boolean;
@@ -22,8 +22,9 @@ interface SettingsModalProps {
 const SettingsModal: React.FC<SettingsModalProps> = ({ 
   isOpen, 
   onClose, 
-  currentUser = {}
+  currentUser={}
 }) => {
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -118,7 +119,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                   >
                     <Button
                       disabled={isLoading}
-                      secondary
                       type="button"
                     >
                       Change
@@ -141,7 +141,6 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
         >
           <Button 
             disabled={isLoading}
-            secondary 
             onClick={onClose}
           >
             Cancel

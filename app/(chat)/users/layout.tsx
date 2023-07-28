@@ -1,7 +1,7 @@
-import getUsers from "../../actions/getUsers";
+import getUsers from "@/actions/getUsers";
 import Sidebar from "@/components/sidebar/Sidebar";
 import UserList from "./components/UserList";
-import { authOptions } from "../api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"; 
 import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation";
 

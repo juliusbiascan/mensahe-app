@@ -2,7 +2,7 @@ import getConversations from "@/actions/getConversations";
 import getUsers from "@/actions/getUsers";
 import Sidebar from "@/components/sidebar/Sidebar";
 import ConversationList from "./components/ConversationList";
-import { authOptions } from "../api/auth/[...nextauth]/route"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route"; 
 import { getServerSession } from "next-auth/next"
 import { redirect } from "next/navigation";
 import getCurrentUser from "@/actions/getCurrentUser";
