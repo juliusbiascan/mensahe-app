@@ -34,7 +34,7 @@ import { BsPeople } from "react-icons/bs";
 import Link from "next/link";
 
 interface UserNavProps {
-  user?: User;
+  user: User;
 }
 
 const UserNav: React.FC<UserNavProps> = ({ user }) => {
