@@ -58,6 +58,6 @@
     "@types/bcrypt": "^5.0.0",
     "@types/lodash": "^4.14.194",
     "encoding": "^0.1.13",
-    "prisma": "^4.16.2"
+    "prisma": "^5.0.0"
   }
 }

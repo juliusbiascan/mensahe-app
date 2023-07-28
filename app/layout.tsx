@@ -1,7 +1,7 @@
 import './globals.css'
 import AuthProvider from '@/context/auth-provider'
 import ActiveStatus from '@/components/ActiveStatus'
-import ToasterContext from '../context/ToasterContext'
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata = {
   title: 'Mensahe',
@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body suppressHydrationWarning={true}>
         <AuthProvider>
-          <ToasterContext />
+          <Toaster/>
           <ActiveStatus />
           {children}
         </AuthProvider>

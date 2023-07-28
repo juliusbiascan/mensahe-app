@@ -4,8 +4,13 @@ import CredentialsProvider from "next-auth/providers/credentials"
 import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { userAuthSchema } from "@/lib/validations/auth"
+import * as z from "zod"
 import prisma from "@/lib/prismadb"
+
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(5, 'Password should be minimum 5 characters'),
+});
 
 export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -26,7 +31,7 @@ export const authOptions: AuthOptions = {
       },
       async authorize(credentials) {
 
-        const { email, password } = userAuthSchema.parse(credentials);
+        const { email, password } = formSchema.parse(credentials);
 
         if (!email || !password) {
           throw new Error('Invalid credentials');
@@ -76,6 +81,7 @@ export const authOptions: AuthOptions = {
   },
   pages: {
     signIn: '/login',
+    newUser: '/register'
   },
   secret: process.env.NEXTAUTH_SECRET,
 }

@@ -14,7 +14,7 @@ export default async function UsersLayout({
   const session = await getServerSession(authOptions)
 
   if (!session) {
-    redirect("/login")
+    redirect("/register")
   }
 
   const users = await getUsers();

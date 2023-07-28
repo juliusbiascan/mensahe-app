@@ -16,7 +16,7 @@ export default async function SetupLayout({
   }
   
   if(!session){
-    redirect("/login")
+    redirect("/register")
   }
 
   return (
