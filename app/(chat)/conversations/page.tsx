@@ -1,21 +1,30 @@
-'use client';
+import getConversations from "@/actions/getConversations";
+import getUsers from "@/actions/getUsers";
+import ConversationList from "./components/ConversationList";
+import { DashboardHeader } from "@/components/header";
+import { DashboardShell } from "@/components/shell";
+import CreateGroupButton from "@/components/create-group-button";
 
-import clsx from "clsx";
+const Home = async () => {
 
-import useConversation from "@/hooks/useConversation";
-import EmptyState from "@/components/EmptyState";
-
-const Home = () => {
-  const { isOpen } = useConversation();
+  const conversations = await getConversations()
+  const users = await getUsers();
 
   return (
-    <div className={clsx(
-      'lg:pl-80 h-full lg:block', 
-      isOpen ? 'block' : 'hidden'
-    )}>
-      <EmptyState />
-    </div>
-  )
+    <DashboardShell>
+      <DashboardHeader
+        heading="Chats"
+      >
+        <CreateGroupButton users={users}></CreateGroupButton>
+      </DashboardHeader>
+      <div className="grid gap-2">
+        <ConversationList
+          title="Messages"
+          initialItems={conversations}
+        />
+      </div>
+    </DashboardShell>
+  );
 }
 
 export default Home;

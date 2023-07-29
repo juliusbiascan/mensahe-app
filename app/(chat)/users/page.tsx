@@ -1,11 +1,22 @@
-import EmptyState from '@/components/EmptyState';
+import { DashboardHeader } from "@/components/header";
+import { DashboardShell } from "@/components/shell";
+import getUsers from "@/actions/getUsers";
+import UserList from "./components/UserList";
 
-const People = () => {
+const People = async () => {
+  const users = await getUsers();
+
   return (
-    <div className="hidden lg:block lg:pl-80 h-full">
-      <EmptyState />
-    </div>
-   );
+    <DashboardShell>
+      <DashboardHeader
+        heading="People"
+      >
+      </DashboardHeader>
+      <div className="grid gap-2">
+        <UserList items={users} />
+      </div>
+    </DashboardShell>
+  );
 }
- 
+
 export default People;
