@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 
 import { dashboardConfig } from "@/config/dashboard"
 import { DashboardNav } from "@/components/nav"
-import UserNav from "@/components/UserNav"
+import UserNav from "@/components/user-nav"
 
 import getCurrentUser from "@/actions/getCurrentUser";
 import getSession from "@/actions/getSession";

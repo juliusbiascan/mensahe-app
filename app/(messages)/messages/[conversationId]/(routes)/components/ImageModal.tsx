@@ -1,6 +1,6 @@
 'use client';
 
-import Modal from '@/components/modals/Modal';
+import Modal from '@/components/modals/modal';
 import Image from 'next/image';
 
 interface ImageModalProps {

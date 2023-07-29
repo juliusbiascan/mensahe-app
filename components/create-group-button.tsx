@@ -1,7 +1,7 @@
 "use client"
 
 import { User } from "@prisma/client";
-import GroupChatModal from "./modals/GroupChatModal";
+import GroupChatModal from "./modals/group-chat-modal";
 import { useState } from "react";
 import { MdOutlineGroupAdd } from 'react-icons/md';
 

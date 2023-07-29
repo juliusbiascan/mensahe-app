@@ -4,7 +4,6 @@ import getMessages from "@/actions/getMessages";
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Form from "./components/Form";
-import EmptyState from "@/components/EmptyState";
 
 interface IParams {
   conversationId: string;
@@ -16,16 +15,16 @@ const ChatId = async ({ params }: { params: IParams }) => {
 
   if (!conversation) {
     return (
-      <div className="lg:pl-80 h-full">
+      <div className="h-full">
         <div className="h-full flex flex-col">
-          <EmptyState />
+          No Messeges
         </div>
       </div>
     )
   }
 
   return ( 
-    <div className="lg:pl-80 h-full">
+    <div className="h-full">
       <div className="h-full flex flex-col">
         <Header conversation={conversation} />
         <Body initialMessages={messages} />

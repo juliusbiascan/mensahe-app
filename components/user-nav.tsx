@@ -29,7 +29,7 @@ import { User } from "@prisma/client";
 import { Button } from "@/components/ui/button"
 import { signOut } from "next-auth/react"
 import useActiveList from "@/hooks/useActiveList";
-import SettingsModal from "./sidebar/SettingsModal";
+import SettingsModal from "./modals/settings-modal";
 import { useState } from "react";
 import { BsPeople } from "react-icons/bs";
 import Link from "next/link";

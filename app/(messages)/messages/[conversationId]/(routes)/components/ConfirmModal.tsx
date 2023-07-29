@@ -5,7 +5,7 @@ import { Dialog } from '@headlessui/react'
 import { FiAlertTriangle } from 'react-icons/fi'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import Modal from '@/components/modals/Modal';
+import Modal from '@/components/modals/modal';
 import { Button } from '@/components/ui/button';
 import useConversation from '@/hooks/useConversation';
 import { toast } from 'react-hot-toast';

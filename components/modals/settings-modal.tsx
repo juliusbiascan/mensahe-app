@@ -7,11 +7,11 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { User } from '@prisma/client';
 import { CldUploadButton } from 'next-cloudinary';
 
-import Input from "@/components/inputs/Input";
-import Modal from '@/components/modals/Modal';
+import Input from "../inputs/Input";
+import Modal from './modal';
+import { Button } from '../ui/button';
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
-import { Button } from '../ui/button';
 
 interface SettingsModalProps {
   isOpen?: boolean;
@@ -19,12 +19,11 @@ interface SettingsModalProps {
   currentUser: User;
 }
 
-const SettingsModal: React.FC<SettingsModalProps> = ({ 
-  isOpen, 
-  onClose, 
+const SettingsModal: React.FC<SettingsModalProps> = ({
+  isOpen,
+  onClose,
   currentUser
 }) => {
-
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -46,8 +45,8 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
   const image = watch('image');
 
   const handleUpload = (result: any) => {
-    setValue('image', result.info.secure_url, { 
-      shouldValidate: true 
+    setValue('image', result.info.secure_url, {
+      shouldValidate: true
     });
   }
 
@@ -55,12 +54,12 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
     setIsLoading(true);
 
     axios.post('/api/settings', data)
-    .then(() => {
-      router.refresh();
-      onClose();
-    })
-    .catch(() => toast.error('Something went wrong!'))
-    .finally(() => setIsLoading(false));
+      .then(() => {
+        router.refresh();
+        onClose();
+      })
+      .catch(() => toast.error('Something went wrong!'))
+      .finally(() => setIsLoading(false));
   }
 
   return (
@@ -68,7 +67,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
-            <h2 
+            <h2
               className="
                 text-base 
                 font-semibold 
@@ -85,15 +84,15 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
             <div className="mt-10 flex flex-col gap-y-8">
               <Input
                 disabled={isLoading}
-                label="Name" 
-                id="name" 
-                errors={errors} 
-                required 
+                label="Name"
+                id="name"
+                errors={errors}
+                required
                 register={register}
               />
               <div>
-                <label 
-                  htmlFor="photo" 
+                <label
+                  htmlFor="photo"
                   className="
                     block 
                     text-sm 
@@ -107,18 +106,19 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
                 <div className="mt-2 flex items-center gap-x-3">
                   <Image
                     width="48"
-                    height="48" 
-                    className="rounded-full" 
+                    height="48"
+                    className="rounded-full"
                     src={image || currentUser?.image || '/images/placeholder.jpg'}
                     alt="Avatar"
                   />
-                  <CldUploadButton 
-                    options={{ maxFiles: 1 }} 
-                    onUpload={handleUpload} 
-                    uploadPreset="g4huzsfn"
+                  <CldUploadButton
+                    options={{ maxFiles: 1 }}
+                    onUpload={handleUpload}
+                    uploadPreset="pgc9ehd5"
                   >
                     <Button
                       disabled={isLoading}
+                      variant={'ghost'}
                       type="button"
                     >
                       Change
@@ -130,7 +130,7 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
           </div>
         </div>
 
-        <div 
+        <div
           className="
             mt-6 
             flex 
@@ -139,14 +139,17 @@ const SettingsModal: React.FC<SettingsModalProps> = ({
             gap-x-6
           "
         >
-          <Button 
+          <Button
             disabled={isLoading}
+            variant={'outline'}
             onClick={onClose}
           >
             Cancel
           </Button>
-          <Button 
+
+          <Button
             disabled={isLoading}
+            variant={'secondary'}
             type="submit"
           >
             Save
