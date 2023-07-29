@@ -10,8 +10,8 @@ import {
 } from 'react-hook-form';
 import { User } from '@prisma/client';
 
-import Input from "../inputs/Input";
-import Select from '../inputs/Select';
+import Input from "../inputs/input";
+import Select from '../inputs/select';
 import Modal from '@/components/modals/Modal';
 import { Button } from '../ui/button';
 import { toast } from 'react-hot-toast';

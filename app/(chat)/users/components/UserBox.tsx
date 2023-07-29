@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import {  User } from "@prisma/client";
 
-import Avatar from "@/components/Avatar";
+import Avatar from "@/components/avatar";
 import { CardSkeleton } from "@/components/card-skeleton";
 
 interface UserBoxProps {

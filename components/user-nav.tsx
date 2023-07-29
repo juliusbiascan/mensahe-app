@@ -97,7 +97,7 @@ const UserNav: React.FC<UserNavProps> = ({ user }) => {
             </DropdownMenuItem>
             <DropdownMenuItem>
               <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
+              <Link href="/settings">Settings</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />

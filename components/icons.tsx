@@ -12,6 +12,7 @@ import {
   Laptop,
   Loader2,
   LucideProps,
+  MessageCircle,
   Moon,
   MoreVertical,
   Pizza,
@@ -21,6 +22,7 @@ import {
   Trash,
   Twitter,
   User,
+  Users,
   X,
 } from "lucide-react"
 
@@ -39,6 +41,8 @@ export const Icons = {
   add: Plus,
   warning: AlertTriangle,
   user: User,
+  users: Users,
+  message_circle: MessageCircle,
   arrowRight: ArrowRight,
   help: HelpCircle,
   pizza: Pizza,

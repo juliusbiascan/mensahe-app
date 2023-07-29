@@ -5,12 +5,12 @@ export const dashboardConfig: DashboardConfig = {
     {
       title: "Conversations",
       href: "/conversations",
-      icon: "post",
+      icon: "message_circle",
     },
     {
       title: "People",
       href: "/users",
-      icon: "billing",
+      icon: "users",
     },
     {
       title: "Settings",

@@ -1,6 +1,6 @@
 import './globals.css'
 import AuthProvider from '@/providers/auth-provider'
-import ActiveStatus from '@/components/ActiveStatus'
+import ActiveStatus from '@/components/active-status'
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from '@/providers/theme-provider'
 

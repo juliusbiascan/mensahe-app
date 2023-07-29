@@ -7,7 +7,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { User } from '@prisma/client';
 import { CldUploadButton } from 'next-cloudinary';
 
-import Input from "../inputs/Input";
+import Input from "../inputs/input";
 import Modal from './Modal';
 import { Button } from '../ui/button';
 import Image from 'next/image';
