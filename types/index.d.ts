@@ -1,5 +1,4 @@
 import {  Conversation, Message, User } from "@prisma/client";
-
 import { Icons } from "@/components/icons"
 
 export type FullMessageType = Message & {
