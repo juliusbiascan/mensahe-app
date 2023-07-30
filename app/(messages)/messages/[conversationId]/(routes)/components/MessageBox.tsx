@@ -35,10 +35,9 @@ const MessageBox: React.FC<MessageBoxProps> = ({
 
   const message = clsx(
     'text-sm w-fit overflow-hidden',
-    isOwn ? 'bg-sky-500 text-white' : 'bg-secondary',
-    isOwn ? 'rounded-xl rounded-tr bg-blue-500 py-2 px-3 text-white' : 'rounded-xl rounded-tl bg-gray-300 py-2 px-3',
-    data.image && 'rounded-md p-0 py-0 px-0'
-  );
+    isOwn ? 'rounded-xl rounded-tr bg-blue-500 text-white' : 'rounded-xl rounded-tl bg-secondary',
+    data.image ? 'rounded-md p-0' : 'py-2 px-3'
+  )
 
   return (
     <div className={container}>
