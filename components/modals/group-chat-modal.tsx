@@ -1,53 +1,53 @@
 'use client';
 
-import axios from 'axios';
-import React, { useState } from 'react'
-import { useRouter } from 'next/navigation';
 import {
-  FieldValues,
   SubmitHandler,
   useForm
 } from 'react-hook-form';
 import { User } from '@prisma/client';
-
-import Input from "../inputs/input";
-import Select from '../inputs/select';
-import Modal from '@/components/modals/Modal';
 import { Button } from '../ui/button';
 import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
+import { Modal } from '@/components/ui/modal';
+import axios from 'axios';
+import { Input } from '../ui/input';
+
+import { z } from 'zod';
+import { groupChatSchema } from '@/lib/validations/gc';
+import Select from '../inputs/select';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import ReactSelect from 'react-select';
 
 interface GroupChatModalProps {
-  isOpen?: boolean;
+  isOpen: boolean;
   onClose: () => void;
   users: User[];
 }
+
+type FormData = z.infer<typeof groupChatSchema>
 
 const GroupChatModal: React.FC<GroupChatModalProps> = ({
   isOpen,
   onClose,
   users = []
 }) => {
+
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    formState: {
-      errors,
-    }
-  } = useForm<FieldValues>({
+  const form = useForm<FormData>({
+    resolver: zodResolver(groupChatSchema),
     defaultValues: {
       name: '',
       members: []
     }
   });
 
-  const members = watch('members');
+  const members = form.watch('members');
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = (data) => {
     setIsLoading(true);
 
     axios.post('/api/conversations', {
@@ -63,62 +63,83 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="space-y-12">
-          <div className="border-b border-gray-900/10 pb-12">
-            <h2
-              className="
-                text-base 
-                font-semibold 
-                leading-7 
-                text-gray-900
-              "
-            >
-              Create a group chat
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-gray-600">
-              Create a chat with more than 2 people.
-            </p>
-            <div className="mt-10 flex flex-col gap-y-8">
-              <Input
-                disabled={isLoading}
-                label="Name"
-                id="name"
-                errors={errors}
-                required
-                register={register}
-              />
-              <Select
-                disabled={isLoading}
-                label="Members"
-                options={users.map((user) => ({
-                  value: user.id,
-                  label: user.name
-                }))}
-                onChange={(value) => setValue('members', value, {
-                  shouldValidate: true
-                })}
-                value={members}
-              />
-            </div>
+
+    <Modal
+      title="Create a group chat"
+      description="Create a chat with more than 2 people."
+      isOpen={isOpen}
+      onClose={onClose}
+    >
+      <div>
+        <div className="space-y-4 py-2 pb-4">
+          <div className="space-y-2">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Group Name</FormLabel>
+                      <FormControl>
+                        <Input disabled={isLoading} placeholder="Group Name" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <Select
+                  disabled={isLoading}
+                  label="Members"
+                  options={users.map((user) => ({
+                    value: user.id,
+                    label: user.name
+                  }))}
+                  onChange={(value) => form.setValue('members', value, {
+                    shouldValidate: true
+                  })}
+                  value={members}
+                />
+
+                <ReactSelect
+                  isDisabled={isLoading}
+                  value={members}
+                  options={
+                    users?.map((user) => ({
+                      value: user?.id,
+                      label: user?.name
+                    }))
+                  }
+                  onChange={(value) => {
+                    form.setValue('members', value, {
+                      shouldValidate: true
+                    })
+                  }
+                  }
+                  isMulti
+                  menuPortalTarget={document.body}
+                  styles={{
+                    menuPortal: (base) => ({ ...base, zIndex: 9999 })
+                  }}
+                  classNames={{
+                    control: () => 'text-sm',
+                  }}
+                />
+
+                <div className="pt-6 space-x-2 flex items-center justify-end w-full">
+                  <Button disabled={isLoading} variant="outline" onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button disabled={isLoading} type="submit">Create</Button>
+                </div>
+              </form>
+            </Form>
           </div>
         </div>
-        <div className="mt-6 flex items-center justify-end gap-x-6">
-          <Button
-            disabled={isLoading}
-            onClick={onClose}
-            type="button"
-            variant={'destructive'}
-          >
-            Cancel
-          </Button>
-          <Button disabled={isLoading} type="submit">
-            Create
-          </Button>
-        </div>
-      </form>
-    </Modal>
+      </div>
+    </Modal >
   )
 }
 

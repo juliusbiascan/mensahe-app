@@ -1,17 +1,17 @@
 'use client';
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { Dialog } from '@headlessui/react'
 import { FiAlertTriangle } from 'react-icons/fi'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import Modal from '@/components/modals/Modal';
+import { Modal } from '@/components/ui/modal';
 import { Button } from '@/components/ui/button';
 import useConversation from '@/hooks/useConversation';
 import { toast } from 'react-hot-toast';
 
 interface ConfirmModalProps {
-  isOpen?: boolean;
+  isOpen: boolean;
   onClose: () => void;
 }
 
@@ -22,6 +22,15 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   const router = useRouter();
   const { conversationId } = useConversation();
   const [isLoading, setIsLoading] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   const onDelete = useCallback(() => {
     setIsLoading(true);
@@ -36,8 +45,14 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
       .finally(() => setIsLoading(false))
   }, [router, conversationId, onClose]);
 
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title={'Delete conversation'}
+      description={'Are you sure you want to delete this conversation? This action cannot be undone.'}>
+
       <div className="sm:flex sm:items-start">
         <div
           className="

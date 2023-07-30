@@ -120,9 +120,9 @@ export function UserRegisterForm({ className, ...props }: UserRegisterFormProps)
               disabled={isLoading || isGitHubLoading}
               {...register("name")}
             />
-            {errors?.email && (
+            {errors?.name && (
               <p className="px-1 text-xs text-red-600">
-                {errors.email.message}
+                {errors.name.message}
               </p>
             )}
           </div>
