@@ -8,6 +8,7 @@ import getCurrentUser from "@/actions/getCurrentUser";
 import getSession from "@/actions/getSession";
 import { redirect } from "next/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { MobileNav } from "@/components/mobile-nav";
 
 interface DashboardLayoutProps {
   children?: React.ReactNode
@@ -31,7 +32,9 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen flex-col space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
         <div className="container flex h-16 items-center justify-between py-4">
+
           <div className="text-2xl font-bold">
+            <MobileNav />
             Mensahe
           </div>
           <div className="flex justify-center gap-2 items-center">

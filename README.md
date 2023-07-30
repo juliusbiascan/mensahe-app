@@ -5,7 +5,7 @@ A project to learn modern full-stack development made by Julius Biascan.
 ## Features
 
 - Realtime messaging
-- Performant database queries with Prisma/Client
+- Performance database queries with Prisma/Client
 - Responsive UI built with TailwindCSS
 - Protection of sensitive routes
 - Google authentication

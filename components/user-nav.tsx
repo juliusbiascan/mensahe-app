@@ -11,6 +11,7 @@ import {
   Github,
   LifeBuoy,
   LogOut,
+  MessageCircle,
   Settings,
   User as Userx,
 } from "lucide-react"
@@ -92,6 +93,10 @@ const UserNav: React.FC<UserNavProps> = ({ user }) => {
               <span>Profile</span>
             </DropdownMenuItem>
             <DropdownMenuItem >
+              <MessageCircle className="mr-2 h-4 w-4" />
+              <Link href="/conversations">Conversations</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem >
               <BsPeople className="mr-2 h-4 w-4" />
               <Link href="/users">People</Link>
             </DropdownMenuItem>
@@ -103,7 +108,7 @@ const UserNav: React.FC<UserNavProps> = ({ user }) => {
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Github className="mr-2 h-4 w-4" />
-            <Link href={"https://github.com/juliusbiascan"}>GitHub</Link>
+            <Link href={"https://github.com/juliusbiascan/mensahe-app"}>GitHub</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <LifeBuoy className="mr-2 h-4 w-4" />
