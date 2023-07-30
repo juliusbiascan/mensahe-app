@@ -43,8 +43,6 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
     }
   });
 
-  const members = form.watch('members');
-
   const onSubmit: SubmitHandler<FormData> = (data) => {
     setIsLoading(true);
 
@@ -101,9 +99,10 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
                               value: user.id,
                               label: user.name
                             }))}
-                            onChange={(value) => form.setValue('members', value, {
-                              shouldValidate: true
-                            })}
+                            onChange={(value) =>
+                              form.setValue('members', value as [], {
+                                shouldValidate: true
+                              })}
                           />
                         </FormControl>
                         <FormMessage />
