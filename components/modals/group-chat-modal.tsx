@@ -8,17 +8,15 @@ import { User } from '@prisma/client';
 import { Button } from '../ui/button';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Modal } from '@/components/ui/modal';
-import axios from 'axios';
 import { Input } from '../ui/input';
-
 import { z } from 'zod';
 import { groupChatSchema } from '@/lib/validations/gc';
-import Select from '../inputs/select';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import ReactSelect from 'react-select';
+import axios from 'axios';
+import Select from 'react-select';
 
 interface GroupChatModalProps {
   isOpen: boolean;
@@ -75,59 +73,44 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
           <div className="space-y-2">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)}>
-
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Group Name</FormLabel>
-                      <FormControl>
-                        <Input disabled={isLoading} placeholder="Group Name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <Select
-                  disabled={isLoading}
-                  label="Members"
-                  options={users.map((user) => ({
-                    value: user.id,
-                    label: user.name
-                  }))}
-                  onChange={(value) => form.setValue('members', value, {
-                    shouldValidate: true
-                  })}
-                  value={members}
-                />
-
-                <ReactSelect
-                  isDisabled={isLoading}
-                  value={members}
-                  options={
-                    users?.map((user) => ({
-                      value: user?.id,
-                      label: user?.name
-                    }))
-                  }
-                  onChange={(value) => {
-                    form.setValue('members', value, {
-                      shouldValidate: true
-                    })
-                  }
-                  }
-                  isMulti
-                  menuPortalTarget={document.body}
-                  styles={{
-                    menuPortal: (base) => ({ ...base, zIndex: 9999 })
-                  }}
-                  classNames={{
-                    control: () => 'text-sm',
-                  }}
-                />
-
+                <div className='flex flex-col gap-2'>
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Group Name</FormLabel>
+                        <FormControl>
+                          <Input disabled={isLoading} placeholder="Group Name" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="members"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Members</FormLabel>
+                        <FormControl>
+                          <Select
+                            isDisabled={isLoading}
+                            isMulti
+                            options={users.map((user) => ({
+                              value: user.id,
+                              label: user.name
+                            }))}
+                            onChange={(value) => form.setValue('members', value, {
+                              shouldValidate: true
+                            })}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
                 <div className="pt-6 space-x-2 flex items-center justify-end w-full">
                   <Button disabled={isLoading} variant="outline" onClick={onClose}>
                     Cancel

@@ -22,15 +22,6 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
   const router = useRouter();
   const { conversationId } = useConversation();
   const [isLoading, setIsLoading] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
 
   const onDelete = useCallback(() => {
     setIsLoading(true);
@@ -44,7 +35,6 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
       .catch(() => toast.error('Something went wrong!'))
       .finally(() => setIsLoading(false))
   }, [router, conversationId, onClose]);
-
 
   return (
     <Modal
