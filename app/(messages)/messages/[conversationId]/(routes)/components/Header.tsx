@@ -9,7 +9,7 @@ import { Conversation, User } from "@prisma/client";
 import useOtherUser from "@/hooks/useOtherUser";
 import useActiveList from "@/hooks/useActiveList";
 
-import Avatar from "@/components/avatar";
+import Avatar from "@/components/avatar-user";
 import AvatarGroup from "@/components/avatar-group";
 import ProfileDrawer from "./ProfileDrawer";
 

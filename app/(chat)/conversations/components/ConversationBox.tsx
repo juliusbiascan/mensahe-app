@@ -6,7 +6,7 @@ import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 import clsx from "clsx";
 
-import Avatar from "@/components/avatar";
+import Avatar from "@/components/avatar-user";
 import useOtherUser from "@/hooks/useOtherUser";
 import AvatarGroup from "@/components/avatar-group";
 import { FullConversationType } from "@/types";

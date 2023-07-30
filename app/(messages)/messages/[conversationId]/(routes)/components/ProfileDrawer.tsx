@@ -9,7 +9,7 @@ import { format } from 'date-fns';
 import useOtherUser from '@/hooks/useOtherUser';
 import useActiveList from '@/hooks/useActiveList';
 
-import Avatar from '@/components/avatar';
+import Avatar from '@/components/avatar-user';
 import AvatarGroup from '@/components/avatar-group';
 import ConfirmModal from './ConfirmModal';
 
