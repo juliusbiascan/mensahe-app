@@ -1,5 +1,5 @@
 # Mensahe App - A full-stack realtime messaging chat application
-
+![Screenshot 2024-04-23 164736](https://github.com/juliusbiascan/mensahe-app/assets/30684921/8ab1faf7-0ec4-44b2-9326-b06eeadfe2de)
 A project to learn modern full-stack development made by Julius Biascan.
 
 ## Features
@@ -19,6 +19,7 @@ A project to learn modern full-stack development made by Julius Biascan.
 - Variants with class-variance-authority
 
 ## Acknowledgements
+
 
 - [Awesome UI Component](https://ui.shadcn.com/)
 
